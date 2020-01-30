@@ -5,13 +5,23 @@ cd $WD
 if [ -e /etc/redhat-release  ] ; then
     ODIR=~/rpmbuild/SOURCES
 else
-    ODIR=..
+	ODIR=$(readlink -f ..)
 fi
 # VER=18.10
 # VER=19.03
-VER=20.01
+# VER=20.01
+function get_ver()
+{
+  by_tag=$(git describe HEAD --tags)
+  v_pfx=${by_tag%%-*}
+  v_num=${v_pfx#v}
+  echo $v_num
+}
 git submodule init
 git submodule update
+VER=$(get_ver)
+test -n "$VER"
+set -x
 for mod in dpdk ocf intel-ipsec-mb isa-l ; do
     (cd $mod;
       git archive \

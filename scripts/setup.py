@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 
 from distutils.core import setup
-
+import os.path
+import shutil
 long_description = 'Storage Performance Development Kit'
 
+# I would like to rename rpc.py in the git repo. But
+if not os.path.exists('spdk_rpc.py'):
+    shutil.copy('rpc.py', 'spdk_rpc.py')
 setup(
     name='spdk-rpc',
     version='20.01',
@@ -23,6 +27,8 @@ setup(
         ('/usr/share/spdk_rpc',
             ['config_converter.py', 'dpdk_mem_info.py',
              'histogram.py', 'iostat.py', 'rpc_http_proxy.py']
-            )
+            ),
+        ('', ['debian/rules', 'debian/changelog.in', 'debian/control',
+              'debian/compat', 'debian/source/format'])
         ]
 )
