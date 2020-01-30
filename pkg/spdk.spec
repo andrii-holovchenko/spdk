@@ -2,7 +2,7 @@
 %bcond_with doc
 
 Name: spdk
-Version: 20.04.x
+Version: 20.04
 Release: 0%{?dist}
 Epoch: 0
 URL: http://spdk.io
