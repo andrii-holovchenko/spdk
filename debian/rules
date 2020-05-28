@@ -5,7 +5,7 @@ export DH_VERBOSE = 1
 SYSTEMD_DIR=/usr/lib/systemd/system
 DEFAULTS_DIR=/etc/default
 SPDK_CONF_DIR=/etc/spdk
-pkg_prefix=/opt/mellanox/snap
+pkg_prefix=/opt/mellanox/spdk
 
 
 # see FEATURE AREAS in dpkg-buildflags(1)
@@ -18,8 +18,8 @@ pkg_prefix=/opt/mellanox/snap
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,'$ORIGIN/../lib'
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,-rpath,$(pkg_prefix)/lib
-# -Wl,-rpath,'$ORIGIN/../lib'
-#	LDFLAGS="\$LDFLAGS -Wl,-rpath,$(pkg_prefix)/lib"
+# -Wl,-rpath,'$$ORIGIN/../lib'
+#	LDFLAGS="$$LDFLAGS -Wl,-rpath,$(pkg_prefix)/lib"
 #	export LDFLAGS
 
 %:
@@ -36,7 +36,7 @@ override_dh_auto_configure:
 	# so that let's use preconfigure debian/CONFIG on Ubuntu
 	cp -p debian/CONFIG CONFIG
 	sed -i 's#CONFIG_PREFIX="/usr.*"#CONFIG_PREFIX="'$(pkg_prefix)'"#' CONFIG
-	./configure \
+	LDFLAGS="$$LDFLAGS -Wl,-rpath,$(pkg_prefix)/lib" ./configure \
         --prefix=$(pkg_prefix) \
 		--disable-coverage \
 		--enable-debug \

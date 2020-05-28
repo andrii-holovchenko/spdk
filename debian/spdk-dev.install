@@ -1,2 +1,2 @@
-opt/mellanox/snap/lib/*.a opt/mellanox/snap/lib
-opt/mellanox/snap/include/* opt/mellanox/snap/include
+opt/mellanox/spdk/lib/*.a opt/mellanox/spdk/lib
+opt/mellanox/spdk/include/* opt/mellanox/spdk/include

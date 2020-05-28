@@ -9,8 +9,7 @@
 %endif
 Epoch: 0
 
-%define pkg_prefix /opt/mellanox/snap
-# %define __global_ldflags '-Wl,-rpath,'%{pkg_prefix}'/lib'
+%define pkg_prefix /opt/mellanox/spdk
 
 Name:		spdk
 Version:	%{scm_version}
