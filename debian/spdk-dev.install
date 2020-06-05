@@ -1,0 +1,2 @@
+opt/mellanox/snap/lib/*.a opt/mellanox/snap/lib
+opt/mellanox/snap/include/* opt/mellanox/snap/include
